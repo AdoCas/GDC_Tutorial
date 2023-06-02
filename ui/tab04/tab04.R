@@ -1,6 +1,19 @@
 tabPanel("Paso 4",
-  h2("Filtrado de los resultados obtenidos"),
-  #includeMarkdown("ui/tab4_01.md"),
+  h2("Agrupación y filtrado de los resultados obtenidos"),
+  includeMarkdown("ui/tab04/tab04_01.md"),
+  sidebarLayout(position = "left",
+                sidebarPanel(
+                  h2("Selección"),
+                  selectInput("t4_Aggregation",
+                              "Campo",
+                              choices = list('type', 'data_type', 'state', 'data_category'),
+                              selected = 1),
+                ),
+                mainPanel(
+                  verbatimTextOutput("t4_ResultAggregation"),
+                )
+  ),
+  includeMarkdown("ui/tab04/tab04_02.md"),
   sidebarLayout(position = "left",
                 sidebarPanel(
                   h2("Selección"),
@@ -18,8 +31,10 @@ tabPanel("Paso 4",
                               selected=1)
                 ),
                 mainPanel(
-                  includeMarkdown("ui/tab4_01.md"),
+                  includeMarkdown("ui/tab04/tab04_03.md"),
                   verbatimTextOutput("t4_ResultQuery"),
+                  verbatimTextOutput("t4_ResultQueryConcatenated"),
+                  includeMarkdown("ui/tab04/tab04_04.md"),
                   verbatimTextOutput("t4_SelectedValuesInformation")
                 )
   )

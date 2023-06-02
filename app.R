@@ -4,10 +4,16 @@ library(ggplot2)
 ui <- fluidPage(
   navbarPage(
     title = "GDC Tutorial",
-    source(file.path("ui", "tab1.R"), local=TRUE)$value,
-    source(file.path("ui", "tab2.R"), local=TRUE)$value,
-    source(file.path("ui", "tab3.R"), local=TRUE)$value,
-    source(file.path("ui", "tab4.R"), local=TRUE)$value,
+    source(file.path("ui/tab01", "tab01.R"), local=TRUE)$value,
+    source(file.path("ui/tab02", "tab02.R"), local=TRUE)$value,
+    source(file.path("ui/tab03", "tab03.R"), local=TRUE)$value,
+    source(file.path("ui/tab04", "tab04.R"), local=TRUE)$value,
+    source(file.path("ui/tab05", "tab05.R"), local=TRUE)$value,
+    source(file.path("ui/tab06", "tab06.R"), local=TRUE)$value,
+    source(file.path("ui/tab07", "tab07.R"), local=TRUE)$value,
+    source(file.path("ui/tab08", "tab08.R"), local=TRUE)$value,
+    source(file.path("ui/tab09", "tab09.R"), local=TRUE)$value,
+    source(file.path("ui/tab10", "tab10.R"), local=TRUE)$value,
     source(file.path("ui", "dashboard.R"), local=TRUE)$value
   )
 )

@@ -1,6 +1,6 @@
 tabPanel("Paso 3",
   h1("Uso de la función GDC Query"),
-  includeMarkdown("ui/tab3_01.md"),
+  includeMarkdown("ui/tab03/tab03_01.md"),
   sidebarLayout(position = "left",
                 sidebarPanel(
                   h2("Entidades"),
@@ -10,7 +10,7 @@ tabPanel("Paso 3",
                               selected = 1)
                 ),
                 mainPanel(
-                  includeMarkdown("ui/tab3_02.md"),
+                  includeMarkdown("ui/tab03/tab03_02.md"),
                   verbatimTextOutput("t3_QueryTypeText"),
                   verbatimTextOutput("t3_MyQuery")
                 )
