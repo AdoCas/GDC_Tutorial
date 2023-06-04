@@ -5,11 +5,11 @@ La Genomic Data Commons (GDC) es una plataforma que proporciona acceso a una amp
 
 Pasos para obtener credenciales de acceso al GDC
 
-## a) Registro en la plataforma GDC
+### a) Registro en la plataforma GDC
 
 El primer paso para obtener credenciales de acceso al GDC es registrarse en la plataforma. Para ello, es necesario visitar el sitio web oficial de la GDC e iniciar el proceso de registro. Proporciona la información solicitada, como tu nombre, dirección de correo electrónico y una contraseña segura. Asegúrate de leer y aceptar los términos y condiciones de uso de la plataforma.
 
-## b) Creación de una aplicación en la GDC
+### b) Creación de una aplicación en la GDC
 
 Una vez que te hayas registrado en la plataforma, el siguiente paso es crear una aplicación en la GDC. Esta aplicación actuará como una interfaz entre tu código en R y la plataforma.
 
@@ -21,7 +21,7 @@ Para crear una aplicación, sigue estos pasos:
 * Proporciona un nombre descriptivo para tu aplicación y, opcionalmente, una descripción breve.
 * Se te proporcionará un identificador único de la aplicación y un secreto de cliente. Estos datos serán necesarios para la autenticación en el siguiente paso.
 
-## c) Autenticación en R utilizando la librería GenomicDataCommons
+### c) Autenticación en R utilizando la librería GenomicDataCommons
 
 Una vez que hayas creado tu aplicación en la GDC, puedes proceder a autenticarte en R utilizando la librería GenomicDataCommons. Sigue estos pasos:
 

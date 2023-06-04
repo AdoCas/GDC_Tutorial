@@ -1,4 +1,19 @@
 tabPanel("Paso 8",
-         h2("Análisis de expresión génica")
-         
+         h2("Análisis exploratorio de datos"),
+         includeMarkdown("ui/tab08/tab08_01.md"),
+         verbatimTextOutput("t8_ProjectsByProgram"),
+         includeMarkdown("ui/tab08/tab08_02.md"),
+         verbatimTextOutput("t8_ProjectsInTCGA"),
+         includeMarkdown("ui/tab08/tab08_03.md"),
+         verbatimTextOutput("t8_ProjectTCGAInfo"),
+         includeMarkdown("ui/tab08/tab08_04.md"),
+         verbatimTextOutput("t8_SampleTypeInTCGA"),
+         includeMarkdown("ui/tab08/tab08_05.md"),
+         verbatimTextOutput("t8_DemographicTCGA"),
+         includeMarkdown("ui/tab08/tab08_06.md"),
+         verbatimTextOutput("t8_HowManyOtherBreastProjects"),
+         includeMarkdown("ui/tab08/tab08_07.md"),
+         verbatimTextOutput("t8_IDsIfOtherBreastProjects"),
+         includeMarkdown("ui/tab08/tab08_08.md"),
+         verbatimTextOutput("t8_NumberOfCases")
 )

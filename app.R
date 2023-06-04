@@ -1,5 +1,7 @@
 library(shiny)
 library(ggplot2)
+library(markdown)
+
 
 ui <- fluidPage(
   navbarPage(
@@ -12,8 +14,6 @@ ui <- fluidPage(
     source(file.path("ui/tab06", "tab06.R"), local=TRUE)$value,
     source(file.path("ui/tab07", "tab07.R"), local=TRUE)$value,
     source(file.path("ui/tab08", "tab08.R"), local=TRUE)$value,
-    source(file.path("ui/tab09", "tab09.R"), local=TRUE)$value,
-    source(file.path("ui/tab10", "tab10.R"), local=TRUE)$value,
     source(file.path("ui", "dashboard.R"), local=TRUE)$value
   )
 )

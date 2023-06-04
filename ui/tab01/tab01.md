@@ -4,7 +4,7 @@ La instalación del paquete GenomicDataCommons es un paso esencial para poder ut
 
 Para realizar una instalación correcta, se deben seguir los siguientes pasos:
 
-## a) Verificación de la versión de R:
+### a) Verificación de la versión de R:
 
 Antes de proceder con la instalación del paquete GenomicDataCommons, es importante asegurarse de tener una versión actualizada de R. Esto es importante debido a que algunas funcionalidades del paquete pueden requerir características específicas de versiones recientes de R.
 
@@ -17,7 +17,7 @@ R.Version()$version.string
 Estos ejemplos se han desarrollado utilizando la versión de R 4.2.3.
 
 
-## b) Instalación de paquetes dependientes: 
+### b) Instalación de paquetes dependientes: 
 
 GenomicDataCommons tiene dependencias adicionales que deben estar instaladas previamente para asegurar su correcto funcionamiento.
 
@@ -27,7 +27,7 @@ Algunos de estos paquetes incluyen httr, jsonlite, curl y digest. Estos paquetes
 install.packages(c("httr", "jsonlite", "curl", "digest"))
 ```
 
-## c) Instalación del paquete GenomicDataCommons
+### c) Instalación del paquete GenomicDataCommons
 
 Una vez que las dependencias están instaladas, se puede proceder a la instalación del paquete GenomicDataCommons utilizando la función BiocManager::install(), que permite instalar paquetes desde el repositorio oficial de Bioconductor. Si no tienes instalado BiocManager, puedes instalarlo ejecutando el siguiente código:
 
@@ -42,7 +42,7 @@ Después de tener BiocManager instalado, debemos ejecutar la siguiente línea de
 BiocManager::install("GenomicDataCommons")
 ```
 
-## d) Carga del paquete GenomicDataCommons:
+### d) Carga del paquete GenomicDataCommons:
 
 Una vez que la instalación se ha completado con éxito, se puede cargar el paquete GenomicDataCommons utilizando la función library():
 

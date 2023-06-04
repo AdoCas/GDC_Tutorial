@@ -1,4 +1,4 @@
 tabPanel("Paso 6",
-         h2("Análisis exploratorio de datos")
-        
+         h2("Descarga de datos"),
+         includeMarkdown("ui/tab06/tab06_01.md")
 )
