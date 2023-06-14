@@ -7,9 +7,25 @@ tabPanel("Paso 8",
          includeMarkdown("ui/tab08/tab08_03.md"),
          verbatimTextOutput("t8_ProjectTCGAInfo"),
          includeMarkdown("ui/tab08/tab08_04.md"),
-         verbatimTextOutput("t8_SampleTypeInTCGA"),
+         column(4,
+           verbatimTextOutput("t8_SampleTypeInTCGA")
+         ),
+         column(8,
+            plotOutput("t8_Plot_SampleTypeInTCGA")
+         ),
          includeMarkdown("ui/tab08/tab08_05.md"),
-         verbatimTextOutput("t8_DemographicTCGA"),
+         column(3,
+            verbatimTextOutput("t8_DemographicTCGA")
+         ),
+         column(3,
+            plotOutput("t8_Plot_DemographycRace")
+         ),
+         column(3,
+            plotOutput("t8_Plot_DemographycGender")
+         ),
+         column(3,
+            plotOutput("t8_Plot_DemographycEthnicity")
+         ),
          includeMarkdown("ui/tab08/tab08_06.md"),
          verbatimTextOutput("t8_HowManyOtherBreastProjects"),
          includeMarkdown("ui/tab08/tab08_07.md"),

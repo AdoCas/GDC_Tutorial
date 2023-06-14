@@ -1,41 +1,74 @@
 # Obtención de credenciales de acceso al GDC
 
-Introducción
-La Genomic Data Commons (GDC) es una plataforma que proporciona acceso a una amplia variedad de datos genómicos y clínicos. Con el fin de acceder y utilizar los recursos disponibles en la GDC desde el entorno de programación R, es necesario obtener credenciales de acceso. Estas credenciales permiten autenticarse correctamente en la plataforma y acceder a los datos requeridos de manera segura y autorizada. En este apartado del tutorial, se explicará detalladamente el proceso de obtención de credenciales de acceso al GDC utilizando la librería GenomicDataCommons de R.
+La Genomic Data Commons (GDC) es una plataforma que proporciona acceso a una amplia variedad de datos genómicos y clínicos.
+
+Mucha de la información proporcionada por la base de datos es de acceso público, no obstante hay una serie de datos a los que únicamente se puede acceder para descargarlos tras obtener una autorización específica.
+
+En el caso de que necesitemos utilizar estos recursos de acceso controlado disponibles en la base de datos del GDC, es necesario obtener ciertas credenciales de acceso que nos permitan autenticarnos correctamente en la plataforma de manera segura y autorizada.
+
+En este apartado del tutorial, se explicará detalladamente el proceso de obtención de credenciales de acceso a la información controlada del GDC y cómo utilizarlas desde la librería GenomicDataCommons de R.
 
 Pasos para obtener credenciales de acceso al GDC
 
-### a) Registro en la plataforma GDC
 
-El primer paso para obtener credenciales de acceso al GDC es registrarse en la plataforma. Para ello, es necesario visitar el sitio web oficial de la GDC e iniciar el proceso de registro. Proporciona la información solicitada, como tu nombre, dirección de correo electrónico y una contraseña segura. Asegúrate de leer y aceptar los términos y condiciones de uso de la plataforma.
+### a) Obtención de cuenta eRA Commons Account
 
-### b) Creación de una aplicación en la GDC
+El primer paso para obtener acceso a los datos disponibles en GDC es la obtención de una cuenta NIH eRA Commons.
 
-Una vez que te hayas registrado en la plataforma, el siguiente paso es crear una aplicación en la GDC. Esta aplicación actuará como una interfaz entre tu código en R y la plataforma.
+Para obtener una cuenta eRA Commons, lo primero que hay que hacer es navegar a su sitio web [https://commons.era.nih.gov/](https://commons.era.nih.gov/) y acceder como miembro de una organización o institución.
 
-Para crear una aplicación, sigue estos pasos:
+En el caso de que pertenezcamos a una institución no reconocida o federada con este sitio, estos tres enlaces nos proporcionan la información y los requisitos necesarios para poder darla de alta:
 
-* Inicia sesión en la GDC con las credenciales que creaste en el paso anterior.
-* Navega hasta la sección de "Aplicaciones" o "Aplicaciones de desarrollador" en la plataforma.
-* Haz clic en el botón "Crear una nueva aplicación" o en un enlace similar.
-* Proporciona un nombre descriptivo para tu aplicación y, opcionalmente, una descripción breve.
-* Se te proporcionará un identificador único de la aplicación y un secreto de cliente. Estos datos serán necesarios para la autenticación en el siguiente paso.
+* [Preguntas frecuentes de eRA Commons](https://era.nih.gov/faqs.htm).
+* [Ayuda y tutoriales de eRA Commons](https://era.nih.gov/help-tutorials).
+* [Ayuda y sistema de tickets de soporte de eRA Commons](http://grants.nih.gov/support/index.html).
 
-### c) Autenticación en R utilizando la librería GenomicDataCommons
 
-Una vez que hayas creado tu aplicación en la GDC, puedes proceder a autenticarte en R utilizando la librería GenomicDataCommons. Sigue estos pasos:
+### b) Obtención del acceso dbGaP
 
-Asegúrate de tener la librería GenomicDataCommons instalada en tu entorno de R. Si no la tienes instalada, puedes hacerlo siguiendo los pasos detallados en el punto anterior de este tutorial
+Una vez obtenida una cuenta eRA, debemos solicitar el acceso a la base de datos de Genotipos y Fenotipos (dbGaP por sus siglas en inglés).
 
-Importa la librería GenomicDataCommons en tu script de R utilizando el comando library(GenomicDataCommons).
-Utiliza la función gdc_login() para iniciar el proceso de autenticación. Esta función tomará como argumentos el identificador de la aplicación y el secreto de cliente que obtuviste al crear la aplicación en la GDC. Por ejemplo:
+Para ello, debemos navegar a su sitio web [Página de Login de dbGaP](https://dbgap.ncbi.nlm.nih.gov/aa/wga.cgi?page=login) y seguir las instrucciones que en ella se encuentran para obtener acceso a la plataforma y a la información controlada.
+
+En los siguientes enlaces se nos proporciona la información para poder llevar a cabo este proceso con éxito:
+
+* [Vídeo explicativo sobre el acceso a la información controlada](https://www.youtube.com/watch?annotation_id=annotation_747461745&feature=iv&src_vid=-3tUBeKbP5c&v=m0xp_cCO7kA)
+* [Preguntas frecuentes de dbGaP](https://www.ncbi.nlm.nih.gov/books/NBK5295/)
+* [Ayuda de la plataforma dbGaP](https://dbgap.ncbi.nlm.nih.gov/aa/wga.cgi?page=email&filter=from&from=login)
+
+
+### c) Acceso a un proyecto de investigación
+
+Una vez tenemos acceso a la información controlada de la plataforma dbGaP como investigadores, se nos muestra una página llamada "Mis proyectos" en la que se nos permiten dos opciones:
+* Crear un nuevo proyecto de investigación (siguiendo los pasos requeridos tras hacer clic en la opción "Crear nuevo proyecto de investigación") 
+* Revisar su proyecto y solicitar acceso a datos controlados (haciendo clic en "Revisar proyecto")
+
+Una vez creado un proyecto de investigación, desde el mismo se puede solicitar el acceso a los distintos datasets existentes en la base de datos, y una vez concedido, ya podemos acceder al GDC para consultarlos.
+
+### d) Registro en la plataforma GDC
+
+Una vez conseguido el acceso a los datos restringidos, el siguiente paso es crear una aplicación en GDC para poder obtener un Token que nos permita autenticarnos desde R con la plataforma.
+
+Para crear una aplicación, debemos seguir estos pasos una vez hayamos iniciado sesión en la plataforma:
+
+* Navegamos hasta la sección de "Aplicaciones" o "Aplicaciones de desarrollador" en la plataforma.
+* Hacemos clic en el botón "Crear una nueva aplicación".
+* Proporcionamos un nombre descriptivo para la aplicación y una breve descripción.
+* Se te proporcionará un identificador único de la aplicación y un token para autenticarnos con una duración máxima de 30 días. Estos datos serán los necesarios para la autenticación en el siguiente paso.
+
+### e) Autenticación desde R utilizando la librería GenomicDataCommons para acceder a la información controlada
+
+El token proporcionado nos permite acceder a la información controlada para poder descargarla y operar con ella sin restricciones.
+
+Al tratarse de una clave de autenticación secreta y cambiante en el tiempo, la librería GenomicDataCommons contempla que el Token esté informado a nivel de sistema en una variable de entorno llamada *GDC_TOKEN*, en un fichero llamado *GDC_TOKEN_FILE* o en un fichero oculto llamado *.gdc_token*
+
+Con el fin de automatizar el acceso al mismo, la librería nos proporciona la función *gdc_token()*, que nos automatiza la consulta del mismo en los elementos comentados anteriormente.
+
+Una vez definido el correspondiente token a nivel de sistema, podemos comprobar que la función lo devuelve correctamente con una instrucción como la siguiente:
 
 ```{r}
-gdc_login(app_id = "tu_identificador_de_aplicacion", app_secret = "tu_secreto_de_cliente")
+token = try(gdc_token(),silent=TRUE)
+token
 ```
 
-Una vez que hayas llamado a la función gdc_login(), se abrirá un navegador web en el que se te pedirá que inicies sesión en la plataforma GDC con las credenciales que proporcionaste durante el registro.
-
-Después de iniciar sesión correctamente, se generará un token de acceso que se almacenará en tu entorno de R.
-
-¡Enhorabuena! Ahora estás autenticado en la plataforma GDC y puedes comenzar a utilizar la librería GenomicDataCommons para acceder a los datos genómicos y realizar análisis en R.
+Una vez tenemos el token debidamente reconocido, veremos posteriormente como utilizarlo para poder descargar la información de acceso restringido.

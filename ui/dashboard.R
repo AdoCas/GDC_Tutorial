@@ -1,18 +1,34 @@
 tabPanel("Dashboard",
   h2("Dashboard"),
-  #includeMarkdown("ui/tab2.md")
-  
+
   sidebarLayout(
     sidebarPanel(
-      selectInput("db_primary_site",
-                  "Zona primaria",
+      sliderInput("db_sl_optionsQtyy",
+                  "Número de elementos a mostrar",
+                  min=15,
+                  max=100,
+                  value=7),
+      selectInput("db_sl_filterType",
+                  "Filtrar por",
                   choices = list(),
-                  selected = 1)
-    ),
+                  selected = 1),
+      checkboxGroupInput("db_ck_first_filter",
+                         "Valores disponibles",
+                         choices = list(),
+                         selected = 1)
+      ),
     mainPanel(
+      column(3,plotlyOutput("db_data_plot_project")),
+      column(3,plotlyOutput("db_data_plot_diseaseType")),
+      column(3,plotlyOutput("db_data_plot_sampleType")),
+      column(3,plotlyOutput("db_data_plot_vitalStatus")),
+      column(3,plotlyOutput("db_data_plot_gender")),
+      column(3,plotlyOutput("db_data_plot_race")),
+      
       DT::dataTableOutput("db_dt_primaryZone"),
-      plotOutput("db_data_plot_01"),
-      plotOutput("db_data_plot_02")
+      plotOutput("db_data_plot_01")
+      
+      
+      )
     )
-  )
 )
