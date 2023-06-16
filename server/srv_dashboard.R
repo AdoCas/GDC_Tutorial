@@ -1,15 +1,20 @@
+# File to store the code for the Dashboard section
+
+# List with the filter type options to apply in the Dashboard
 db_filterTypeOptions = list("Zona primaria"="primary_site",
                             "Proyecto"="project.project_id",
                             "Tipo de enfermedad"="disease_type")
 
+# Function responsible for update de dropdown with the filter type options
 updateSelectInput(session = getDefaultReactiveDomain(), "db_sl_filterType", choices=db_filterTypeOptions, selected=head(db_filterTypeOptions, 1))
 
-
+# Load the data that will be used for filter the results.
 db_data_aggregated<-cases() %>% 
   facet(c("primary_site", "project.project_id", "disease_type", "samples.sample_type")) %>% 
   aggregations()
 
 
+# Function responsible for showing the selected number of values to filter.
 observe({
   req(input$db_sl_optionsQtyy)
   req(input$db_sl_filterType)
@@ -19,6 +24,7 @@ observe({
 })
 
 
+# Function resposible for filter the data that will be shown in the Dashboard depending on the filter type selected
 get_filtered_data <- reactive({
   req(input$db_sl_filterType)
   req(input$db_ck_first_filter)
@@ -51,8 +57,7 @@ get_filtered_data <- reactive({
 })
 
 
-
-
+# Function responsible for render the data table shown in the Dashboard
 output$db_dt_primaryZone <- DT::renderDataTable({
   req(input$db_sl_filterType)
   
@@ -63,6 +68,7 @@ output$db_dt_primaryZone <- DT::renderDataTable({
                 colnames = c("Elemento seleccionado", "Número de casos"))
 })
 
+# Function responsible for render the pie chart shown in the Dashboard with the Project information
 output$db_data_plot_project <- renderPlotly({
   data <- get_filtered_data()
   
@@ -83,6 +89,7 @@ output$db_data_plot_project <- renderPlotly({
   
 })
 
+# Function responsible for render the pie chart shown in the Dashboard with the Disease Type information
 output$db_data_plot_diseaseType <- renderPlotly({
   data <- get_filtered_data()
   
@@ -101,6 +108,7 @@ output$db_data_plot_diseaseType <- renderPlotly({
   fig
 })
 
+# Function responsible for render the pie chart shown in the Dashboard with the Sample Type information
 output$db_data_plot_sampleType <- renderPlotly({
   data <- get_filtered_data()
 
@@ -119,6 +127,7 @@ output$db_data_plot_sampleType <- renderPlotly({
   fig
 })
 
+# Function responsible for render the pie chart shown in the Dashboard with the Vital Status information
 output$db_data_plot_vitalStatus <- renderPlotly({
   data <- get_filtered_data()
   
@@ -137,6 +146,7 @@ output$db_data_plot_vitalStatus <- renderPlotly({
   fig
 })
 
+# Function responsible for render the pie chart shown in the Dashboard with the Gender information
 output$db_data_plot_gender <- renderPlotly({
   data <- get_filtered_data()
   
@@ -155,6 +165,7 @@ output$db_data_plot_gender <- renderPlotly({
   fig
 })
 
+# Function responsible for render the pie chart shown in the Dashboard with the Race information
 output$db_data_plot_race <- renderPlotly({
   data <- get_filtered_data()
   
