@@ -1,3 +1,4 @@
+# List with some common query options used more than once.
 queryOptions=list("cases"="cases",
                   "files"="files",
                   "projects"="projects",

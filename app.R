@@ -2,6 +2,7 @@ library(shiny)
 library(ggplot2)
 library(markdown)
 library(plotly)
+library(data.table)
 
 
 ui <- fluidPage(

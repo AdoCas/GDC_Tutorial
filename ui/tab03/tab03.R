@@ -1,5 +1,5 @@
 tabPanel("Paso 3",
-  h1("Uso de la función GDC Query"),
+  h1("Uso de la función Query"),
   includeMarkdown("ui/tab03/tab03_01.md"),
   sidebarLayout(position = "left",
                 sidebarPanel(

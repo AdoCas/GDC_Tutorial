@@ -5,7 +5,6 @@ db_filterTypeOptions = list("Zona primaria"="primary_site",
 updateSelectInput(session = getDefaultReactiveDomain(), "db_sl_filterType", choices=db_filterTypeOptions, selected=head(db_filterTypeOptions, 1))
 
 
-
 db_data_aggregated<-cases() %>% 
   facet(c("primary_site", "project.project_id", "disease_type", "samples.sample_type")) %>% 
   aggregations()
@@ -24,7 +23,7 @@ get_filtered_data <- reactive({
   req(input$db_sl_filterType)
   req(input$db_ck_first_filter)
   
-  facets<-c("project.project_id","demographic.gender","demographic.vital_status", "demographic.race","samples.sample_type", "disease_type")
+  facets<-c("project.project_id","demographic.gender","demographic.vital_status", "demographic.race","samples.sample_type", "disease_type", "demographic.year_of_birth")
 
   if (input$db_sl_filterType == "primary_site")
   {
@@ -55,18 +54,14 @@ get_filtered_data <- reactive({
 
 
 output$db_dt_primaryZone <- DT::renderDataTable({
-  DT::datatable(db_data_aggregated$primary_site)
-})
-
-
-output$db_data_plot_01 <- renderPlot({
-  data <- get_filtered_data()
+  req(input$db_sl_filterType)
   
-  ggplot(data$project.project_id,aes(x = key, y = doc_count)) +
-    geom_bar(stat='identity') +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  db_f_primarySite = db_data_aggregated[[input$db_sl_filterType]]
+  setcolorder(db_f_primarySite, c("key", "doc_count"))
+  DT::datatable(db_f_primarySite, 
+                selection = "none",
+                colnames = c("Elemento seleccionado", "Número de casos"))
 })
-
 
 output$db_data_plot_project <- renderPlotly({
   data <- get_filtered_data()
@@ -75,12 +70,13 @@ output$db_data_plot_project <- renderPlotly({
                  labels=data$project.project_id$key, 
                  values=data$project.project_id$doc_count, 
                  type="pie",
-                 textposition='none',
+                 textposition='inside',
+                 textinfo = 'percent',
                  insidetextfont = list(color = '#FFFFFF'),
                  hoverinfo = 'text',
                  text = ~paste(doc_count, ' ', key),
                  showlegend = FALSE) %>%
-    layout(title = 'PROJECT',
+    layout(title = 'PROYECTO',
            xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
            yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
   fig
@@ -93,13 +89,13 @@ output$db_data_plot_diseaseType <- renderPlotly({
   fig <- plot_ly(data$disease_type, 
                  labels=data$disease_type$key, 
                  values=data$disease_type$doc_count, type="pie",
-                 textinfo = 'label+percent',
+                 textinfo = 'percent',
                  insidetextfont = list(color = '#FFFFFF'),
                  hoverinfo = 'text',
-                 textposition='none',
+                 textposition='inside',
                  text = ~paste(doc_count, ' ', key),
                  showlegend = FALSE) %>%
-    layout(title = 'DISEASE TYPE',
+    layout(title = 'TIPO DE ENFERMEDAD',
            xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
            yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
   fig
@@ -111,13 +107,13 @@ output$db_data_plot_sampleType <- renderPlotly({
   fig <- plot_ly(data$samples.sample_type, 
                  labels=data$samples.sample_type$key, 
                  values=data$samples.sample_type$doc_count, type="pie",
-                 textinfo = 'label+percent',
+                 textinfo = 'percent',
                  insidetextfont = list(color = '#FFFFFF'),
                  hoverinfo = 'text',
-                 textposition='none',
+                 textposition='inside',
                  text = ~paste(doc_count, ' ', key),
                  showlegend = FALSE) %>%
-    layout(title = 'SAMPLE TYPE',
+    layout(title = 'TIPO DE MUESTRA',
            xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
            yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
   fig
@@ -129,13 +125,13 @@ output$db_data_plot_vitalStatus <- renderPlotly({
   fig <- plot_ly(data$demographic.vital_status, 
                  labels=data$demographic.vital_status$key, 
                  values=data$demographic.vital_status$doc_count, type="pie",
-                 textinfo = 'label+percent',
+                 textinfo = 'percent',
                  insidetextfont = list(color = '#FFFFFF'),
                  hoverinfo = 'text',
-                 textposition='none',
+                 textposition='inside',
                  text = ~paste(doc_count, ' ', key),
                  showlegend = FALSE) %>%
-    layout(title = 'VITAL STATUS',
+    layout(title = 'ESTADO VITAL',
            xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
            yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
   fig
@@ -147,13 +143,13 @@ output$db_data_plot_gender <- renderPlotly({
   fig <- plot_ly(data$demographic.gender, 
                  labels=data$demographic.gender$key, 
                  values=data$demographic.gender$doc_count, type="pie",
-                 textinfo = 'label+percent',
-                 textposition='none',
+                 textinfo = 'percent',
+                 textposition='inside',
                  insidetextfont = list(color = '#FFFFFF'),
                  hoverinfo = 'text',
                  text = ~paste(doc_count, ' ', key),
                  showlegend=FALSE) %>%
-    layout(title = 'GENDER',
+    layout(title = 'GÉNERO',
            xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
            yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
   fig
@@ -165,13 +161,13 @@ output$db_data_plot_race <- renderPlotly({
   fig <- plot_ly(data$demographic.race, 
                  labels=data$demographic.race$key, 
                  values=data$demographic.race$doc_count, type="pie",
-                 textinfo = 'label+percent',
-                 textposition='none',
+                 textinfo = 'percent',
+                 textposition='inside',
                  insidetextfont = list(color = '#FFFFFF'),
                  hoverinfo = 'text',
                  text = ~paste(doc_count, ' ', key),
                  showlegend=FALSE) %>%
-    layout(title = 'RACE',
+    layout(title = 'RAZA',
            xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
            yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
   fig
